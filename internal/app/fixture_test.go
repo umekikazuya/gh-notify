@@ -1,4 +1,4 @@
-package app_test
+package app
 
 import "github.com/umekikazuya/gh-notify/internal/notification"
 
