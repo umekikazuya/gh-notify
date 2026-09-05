@@ -17,6 +17,16 @@ type Model struct {
 	Error         error
 }
 
+func NewModel(
+	width int,
+	all bool,
+) Model {
+	return Model{
+		Width: width,
+		All:   all,
+	}
+}
+
 func View(model Model) string {
 	if model.Loading {
 		return "Loading notifications."
