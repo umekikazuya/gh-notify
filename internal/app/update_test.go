@@ -68,6 +68,23 @@ func Test_model_Update(t *testing.T) {
  w:open r:read u:unread q:quit`,
 		},
 		{
+			name: "カーソルがこれ以上上がらない",
+			seedFn: func(t *testing.T) tea.Model {
+				t.Helper()
+				return &Model{Notifications: []notification.Notification{
+					notificationData1,
+					notificationData2,
+				}, Cursor: 0, Width: 80, All: false, Loading: false, Error: nil}
+			},
+			msg:  nil,
+			want: ` gh notify                                                              2 unread
+--------------------------------------------------------------------------------
+> review  #12  Rotate TLS certs 30m
+  mention #111 キャッシュの 確認 をお願いします。  1h
+--------------------------------------------------------------------------------
+ w:open r:read u:unread q:quit`,
+		},
+		{
 			name: "カーソルがこれ以上下がらない",
 			seedFn: func(t *testing.T) tea.Model {
 				t.Helper()
