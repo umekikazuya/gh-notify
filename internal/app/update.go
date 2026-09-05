@@ -20,7 +20,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func cursorDown(m *Model) tea.Cmd {
 	return func() tea.Msg {
-		if len(m.Notifications) == m.Cursor {
+		if len(m.Notifications)-1 == m.Cursor {
 			return nil
 		}
 		m.Cursor++

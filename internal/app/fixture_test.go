@@ -24,4 +24,13 @@ var (
 		Repo:   "example/app",
 		Age:    "1h",
 	}
+	notificationData3 = notification.Notification{
+		ID:     "3",
+		Reason: "mention",
+		URL:    hostName + "/" + repo2,
+		Number: "#111",
+		Title:  "APIの\n確認\rをお願いします。",
+		Repo:   "example/app",
+		Age:    "1h",
+	}
 )
