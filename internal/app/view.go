@@ -99,6 +99,12 @@ func renderNotification(
 // - tab
 // - 連続空白
 func normalizeText(in string) string {
+	in = strings.Map(func(r rune) rune {
+		if unicode.IsControl(r) && !unicode.IsSpace(r) {
+			return -1
+		}
+		return r
+	}, in)
 	return strings.Join(
 		strings.FieldsFunc(in, unicode.IsSpace),
 		" ",
