@@ -11,10 +11,13 @@ reviews:
   auto_review:
     drafts: false
     base_branches:
+      - main
       - develop
   tools:
     golangci-lint:
       enabled: true
+knowledge_base:
+  opt_out: true
 code_generation:
   docstrings:
     language: ja-JP
