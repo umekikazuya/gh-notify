@@ -55,7 +55,10 @@ func renderHeader(width int, all bool, count int) string {
 	}
 	countLabel := fmt.Sprintf("%d unread", count)
 	space := width - displayWidth(command) - displayWidth(countLabel)
-	return command + strings.Repeat(" ", space) + countLabel
+	lines := command +
+		strings.Repeat(" ", max(space, 0)) +
+		countLabel
+	return fitLine(lines, width)
 }
 
 func renderNotification(
