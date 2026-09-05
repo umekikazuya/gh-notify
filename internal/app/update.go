@@ -8,10 +8,10 @@ import (
 func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyPressMsg:
-		if msg.Text == "j" {
+		switch msg.Key().String() {
+		case "j", "down":
 			return m, moveCursorDown(m)
-		}
-		if msg.Text == "k" {
+		case "k", "up":
 			return m, moveCursorUp(m)
 		}
 	}
