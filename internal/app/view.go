@@ -159,19 +159,31 @@ func runeDisplayWidth(r rune) int {
 	}
 }
 
+// wideRuneRanges は全角幅として扱うコードポイントの範囲一覧。
+var wideRuneRanges = [...]struct{ lo, hi rune }{
+	{0x1100, 0x115F},
+	{0x2329, 0x232A},
+	{0x2E80, 0xA4CF},
+	{0xAC00, 0xD7A3},
+	{0xF900, 0xFAFF},
+	{0xFE10, 0xFE19},
+	{0xFE30, 0xFE6F},
+	{0xFF00, 0xFF60},
+	{0xFFE0, 0xFFE6},
+	{0x20000, 0x2FFFD},
+	{0x30000, 0x3FFFD},
+}
+
 func isWideRune(r rune) bool {
-	return r >= 0x1100 && (r <= 0x115F ||
-		r == 0x2329 ||
-		r == 0x232A ||
-		(r >= 0x2E80 && r <= 0xA4CF && r != 0x303F) ||
-		(r >= 0xAC00 && r <= 0xD7A3) ||
-		(r >= 0xF900 && r <= 0xFAFF) ||
-		(r >= 0xFE10 && r <= 0xFE19) ||
-		(r >= 0xFE30 && r <= 0xFE6F) ||
-		(r >= 0xFF00 && r <= 0xFF60) ||
-		(r >= 0xFFE0 && r <= 0xFFE6) ||
-		(r >= 0x20000 && r <= 0x2FFFD) ||
-		(r >= 0x30000 && r <= 0x3FFFD))
+	if r == 0x303F {
+		return false
+	}
+	for _, rg := range wideRuneRanges {
+		if r >= rg.lo && r <= rg.hi {
+			return true
+		}
+	}
+	return false
 }
 
 func padRight(value string, width int) string {
