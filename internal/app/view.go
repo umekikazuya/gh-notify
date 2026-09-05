@@ -41,7 +41,12 @@ func View(model Model) string {
 	}
 
 	if model.Error != nil {
-		return fmt.Sprintf("Error: %v", model.Error.Error())
+		return fitLine(
+			normalizeText(
+				fmt.Sprintf("Error: %v", model.Error.Error()),
+			),
+			width,
+		)
 	}
 	lines = append(lines, rule(width))
 	lines = append(lines, fitLine(" w:open r:read u:unread q:quit", width))

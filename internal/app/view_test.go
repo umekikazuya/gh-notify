@@ -108,7 +108,7 @@ func Test_normalizeText(t *testing.T) {
 		},
 		{
 			name: "ab<space><space><space>cde",
-			in:   "ab  cde",
+			in:   "ab   cde",
 			want: "ab cde",
 		},
 		{
