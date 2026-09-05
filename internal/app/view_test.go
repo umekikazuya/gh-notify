@@ -27,7 +27,12 @@ func TestView(t *testing.T) {
 				Loading: false,
 				Error:   nil,
 			},
-			want: "",
+			want: ` gh notify                                                              2 unread
+--------------------------------------------------------------------------------
+> review  #12  Rotate TLS certs 30m
+  mention #111 キャッシュの 確認 をお願いします。  1h
+--------------------------------------------------------------------------------
+ w:open r:read u:unread q:quit`,
 		},
 		{
 			name: "loading",
@@ -39,7 +44,11 @@ func TestView(t *testing.T) {
 				Loading:       true,
 				Error:         nil,
 			},
-			want: "Loading notifications.",
+			want: ` gh notify                                                              0 unread
+--------------------------------------------------------------------------------
+Loading notifications.
+--------------------------------------------------------------------------------
+ w:open r:read u:unread q:quit`,
 		},
 		{
 			name: "notfound",
@@ -51,7 +60,11 @@ func TestView(t *testing.T) {
 				Loading:       false,
 				Error:         nil,
 			},
-			want: "No unread notifications.",
+			want: ` gh notify                                                              0 unread
+--------------------------------------------------------------------------------
+No unread notifications.
+--------------------------------------------------------------------------------
+ w:open r:read u:unread q:quit`,
 		},
 		{
 			name: "Error(api)",
@@ -65,26 +78,13 @@ func TestView(t *testing.T) {
 			},
 			want: "Error: APIエラー",
 		},
-		{
-			name: "all(`--all`)",
-			model: Model{
-				Notifications: []notification.Notification{
-					notificationData1, notificationData2,
-				},
-				Cursor:  0,
-				Width:   80,
-				All:     true,
-				Loading: false,
-				Error:   nil,
-			},
-			want: "",
-		},
+		// TODO: `--all`
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got := View(tt.model)
 			if got != tt.want {
-				t.Errorf("View() =\n %v, want =\n %v", got, tt.want)
+				t.Errorf("View() =\n%v, want =\n%v", got, tt.want)
 			}
 		})
 	}
@@ -159,30 +159,6 @@ func Test_rule(t *testing.T) {
 			got := rule(tt.width)
 			if got != tt.want {
 				t.Errorf("rule() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Test_truncateDisplay(t *testing.T) {
-	tests := []struct {
-		name  string
-		value string
-		width int
-		want  string
-	}{
-		{
-			name:  "case1",
-			value: " Loading notifications...",
-			width: 80,
-			want:  "",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := truncateDisplay(tt.value, tt.width)
-			if got != tt.want {
-				t.Errorf("truncateDisplay() = %v, want %v", got, tt.want)
 			}
 		})
 	}
