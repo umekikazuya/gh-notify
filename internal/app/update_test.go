@@ -110,8 +110,13 @@ func Test_model_Update(t *testing.T) {
 					notificationData2,
 				}, Cursor: 1, Width: 80, All: false, Loading: false, Error: nil}
 			},
-			msg:  tea.KeyPressMsg{Text: "q", Mod: 0, Code: 'q', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
-			want: "",
+			msg: tea.KeyPressMsg{Text: "q", Mod: 0, Code: 'q', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
+			want: ` gh notify                                                              2 unread
+--------------------------------------------------------------------------------
+  review  #12  Rotate TLS certs 30m
+> mention #111 キャッシュの 確認 をお願いします。  1h
+--------------------------------------------------------------------------------
+ w:open r:read u:unread q:quit`,
 		},
 	}
 	for _, tt := range tests {

@@ -10,7 +10,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyPressMsg:
 		switch msg.Key().String() {
 		case "j", "down":
-			if m.Cursor <= len(m.Notifications)-1 {
+			if m.Cursor < len(m.Notifications)-1 {
 				m.Cursor++
 			}
 			return m, nil
