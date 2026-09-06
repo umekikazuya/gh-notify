@@ -66,7 +66,6 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 		if m.Loading {
 			return m, nil
 		}
-		m.Loading = true
 		n := m.Notifications[m.Cursor]
 		return m, func() tea.Msg {
 			return markIdleMsg{
