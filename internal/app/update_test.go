@@ -118,7 +118,7 @@ func Test_model_Update(t *testing.T) {
   review  #12  Rotate TLS certs 30m
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 			assertFn: func(t *testing.T, cmd tea.Cmd) {
 				t.Helper()
 				got := cmd()
