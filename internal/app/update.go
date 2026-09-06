@@ -29,6 +29,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.Error = msg.Err
 		return m, nil
 	case markIdleMsg:
+		if m.Loading {
+			return m, nil
+		}
 		m.Loading = true
 		m.Error = nil
 		return m, m.MarkNotificationFn(msg.id, msg.markType)
@@ -38,6 +41,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		idx := slices.IndexFunc(m.Notifications, func(e notification.Notification) bool {
 			return e.ID == msg.n.ID
 		})
+		if idx == -1 {
+			return m, nil
+		}
 		m.Notifications[idx] = msg.n
 		return m, nil
 	case markFailedMsg:
