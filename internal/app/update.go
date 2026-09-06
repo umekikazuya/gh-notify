@@ -5,6 +5,8 @@ import (
 )
 
 // Update implements [tea.Model].
+//
+// TODO: 再読み込み
 func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case loadIdleMsg:
@@ -26,13 +28,16 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyPressMsg:
 		return handleKey(m, msg)
 	default:
-		return nil, nil
+		return m, nil
 	}
 }
 
 func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 	switch msg.Key().String() {
 	case "m":
+		if len(m.Notifications) == 0 {
+			return m, nil
+		}
 		if m.Loading {
 			return m, nil
 		}
