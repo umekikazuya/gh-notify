@@ -25,8 +25,8 @@ func moveCursorUp(m *Model) tea.Cmd {
 	}
 }
 
-// loadNotifications は読み込みコマンド
-func loadNotifications(client githubClient) tea.Cmd {
+// getAllNotifications は読み込みコマンド
+func getAllNotifications(client githubClient) tea.Cmd {
 	return func() tea.Msg {
 		ns := []notification.Notification{}
 		var err error
@@ -39,5 +39,11 @@ func loadNotifications(client githubClient) tea.Cmd {
 		return loadSuccessedMsg{
 			notifications: ns,
 		}
+	}
+}
+
+func togglReadNotification(client githubClient) tea.Cmd {
+	return func() tea.Msg {
+		return nil
 	}
 }

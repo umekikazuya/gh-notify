@@ -33,7 +33,7 @@ func Test_model_Update(t *testing.T) {
 > mention #111 キャッシュの 確認 をお願いします。  1h
   mention #111 APIの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "keyup",
@@ -50,7 +50,7 @@ func Test_model_Update(t *testing.T) {
 > review  #12  Rotate TLS certs 30m
   mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "q キーはなにもしない",
@@ -67,7 +67,7 @@ func Test_model_Update(t *testing.T) {
   review  #12  Rotate TLS certs 30m
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "カーソルがこれ以上上がらない",
@@ -84,7 +84,7 @@ func Test_model_Update(t *testing.T) {
 > review  #12  Rotate TLS certs 30m
   mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "カーソルがこれ以上下がらない",
@@ -101,7 +101,7 @@ func Test_model_Update(t *testing.T) {
   review  #12  Rotate TLS certs 30m
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "q キー入力",

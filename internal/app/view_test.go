@@ -32,7 +32,7 @@ func TestView(t *testing.T) {
   review  #12  Rotate TLS certs 30m
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "loading",
@@ -48,7 +48,7 @@ func TestView(t *testing.T) {
 --------------------------------------------------------------------------------
 Loading notifications.
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "notfound",
@@ -64,7 +64,7 @@ Loading notifications.
 --------------------------------------------------------------------------------
 No unread notifications.
 --------------------------------------------------------------------------------
- w:open r:read u:unread q:quit`,
+ w:open r:read/unread q:quit`,
 		},
 		{
 			name: "Error(api)",

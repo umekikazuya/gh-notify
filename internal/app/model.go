@@ -27,7 +27,7 @@ func NewModel(
 // Init implements [tea.Model].
 func (m *Model) Init() tea.Cmd {
 	return func() tea.Msg {
-		return loadNotifications(nil)
+		return getAllNotifications(nil)
 	}
 }
 
