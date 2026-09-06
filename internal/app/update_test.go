@@ -78,7 +78,8 @@ func Test_model_Update(t *testing.T) {
 					notificationData2,
 				}, Cursor: 0, Width: 80, All: false, Loading: false, Error: nil}
 			},
-			msg: nil,
+			msg: tea.KeyPressMsg{Text: "k", Mod: 0, Code: 'k', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
+
 			want: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
 > review  #12  Rotate TLS certs 30m
