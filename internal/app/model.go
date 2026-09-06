@@ -12,22 +12,31 @@ type Model struct {
 	All           bool
 	Loading       bool
 	Error         error
+	FindAllFn     FindAllFn
 }
+
+type (
+	FindAllFn            func() tea.Cmd
+	ReadNotificationFn   func(notification.Notification) tea.Cmd
+	UnreadNotificationFn func(notification.Notification) tea.Cmd
+)
 
 func NewModel(
 	width int,
 	all bool,
+	findAllFn FindAllFn,
 ) Model {
 	return Model{
-		Width: width,
-		All:   all,
+		Width:     width,
+		All:       all,
+		FindAllFn: findAllFn,
 	}
 }
 
 // Init implements [tea.Model].
 func (m *Model) Init() tea.Cmd {
 	return func() tea.Msg {
-		return getAllNotifications(nil)
+		return m.FindAllFn
 	}
 }
 
