@@ -9,6 +9,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyPressMsg:
 		switch msg.Key().String() {
+		case "r":
+			m.Loading = true
+			return m, loadNotifications(m, nil)
 		case "j", "down":
 			if m.Cursor < len(m.Notifications)-1 {
 				m.Cursor++
