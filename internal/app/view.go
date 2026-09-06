@@ -36,7 +36,7 @@ func View(model Model) string {
 	case model.Loading:
 		lines = append(lines, fitLine("Loading notifications.", width))
 	case len(model.Notifications) == 0:
-		lines = append(lines, fitLine("No unread notifications.", width))
+		lines = append(lines, fitLine("No notifications.", width))
 	default:
 		for i, n := range model.Notifications {
 			lines = append(
@@ -55,7 +55,7 @@ func View(model Model) string {
 		)
 	}
 	lines = append(lines, rule(width))
-	lines = append(lines, fitLine(" w:open r:read u:unread q:quit", width))
+	lines = append(lines, fitLine(" w:open m:markRead/markUnread q:quit", width))
 	return strings.Join(lines, "\n")
 }
 
