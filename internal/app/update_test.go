@@ -79,7 +79,6 @@ func Test_model_Update(t *testing.T) {
 				}, Cursor: 0, Width: 80, All: false, Loading: false, Error: nil}
 			},
 			msg: tea.KeyPressMsg{Text: "k", Mod: 0, Code: 'k', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
-
 			want: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
 > review  #12  Rotate TLS certs 30m
@@ -131,6 +130,39 @@ func Test_model_Update(t *testing.T) {
 					)
 				}
 			},
+		},
+		{
+			name: "読み込み中メッセージ",
+			seedFn: func(t *testing.T) tea.Model {
+				t.Helper()
+				return &Model{Notifications: []notification.Notification{
+					notificationData1,
+					notificationData2,
+				}, Cursor: 1, Width: 80, All: false, Loading: false, Error: nil}
+			},
+			msg: tea.KeyPressMsg{
+				Text:        "ctrl+r",
+				Mod:         0,
+				ShiftedCode: 0,
+				BaseCode:    0,
+				IsRepeat:    false,
+			},
+			want: "",
+		},
+		{
+			name: "読み込みの排他制御",
+			seedFn: func(t *testing.T) tea.Model {
+				t.Helper()
+				return &Model{Notifications: []notification.Notification{notificationData1, notificationData2}, Cursor: 0, Width: 80, All: false, Loading: true, Error: nil}
+			},
+			msg: tea.KeyPressMsg{
+				Text:        "ctrl+r",
+				Mod:         0,
+				ShiftedCode: 0,
+				BaseCode:    0,
+				IsRepeat:    false,
+			},
+			want: "",
 		},
 	}
 	for _, tt := range tests {

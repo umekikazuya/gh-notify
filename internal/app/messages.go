@@ -1,13 +1,13 @@
 package app
 
-type (
-	loadIdleMsg struct {
-	}
-	loadSuccessedMsg struct{
-				notifications []Model
+import "github.com/umekikazuya/gh-notify/internal/notification"
 
+type (
+	loadIdleMsg      struct{}
+	loadSuccessedMsg struct {
+		notifications []notification.Notification
 	}
-	loadFailed       struct {
+	loadFailed struct {
 		Err error
 	}
 )

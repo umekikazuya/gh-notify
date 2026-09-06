@@ -2,6 +2,7 @@ package app
 
 import (
 	tea "charm.land/bubbletea/v2"
+	"github.com/umekikazuya/gh-notify/internal/notification"
 )
 
 func moveCursorDown(m *Model) tea.Cmd {
@@ -24,10 +25,12 @@ func moveCursorUp(m *Model) tea.Cmd {
 	}
 }
 
-// 読み込み結果を
-func loadNotifications(m *Model, client githubClient) tea.Cmd {
+// loadNotifications は読み込みコマンド
+func loadNotifications(client githubClient) tea.Cmd {
 	return func() tea.Msg {
-		ns, err := client.Exec()
+		ns := []notification.Notification{}
+		var err error
+		// ns, err := client.Exec()
 		if err != nil {
 			return loadFailed{
 				Err: err,
