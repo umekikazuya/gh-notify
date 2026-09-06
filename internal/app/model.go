@@ -1,6 +1,7 @@
 package app
 
 import (
+	tea "charm.land/bubbletea/v2"
 	"github.com/umekikazuya/gh-notify/internal/notification"
 )
 
@@ -22,3 +23,10 @@ func NewModel(
 		All:   all,
 	}
 }
+
+// Init implements [tea.Model].
+func (m *Model) Init() tea.Cmd {
+	return nil
+}
+
+var _ tea.Model = (*Model)(nil)

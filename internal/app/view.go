@@ -6,8 +6,14 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	tea "charm.land/bubbletea/v2"
 	"github.com/umekikazuya/gh-notify/internal/notification"
 )
+
+// View implements [tea.Model].
+func (m *Model) View() tea.View {
+	return tea.NewView(View(*m))
+}
 
 var (
 	defaultWidth = 80
