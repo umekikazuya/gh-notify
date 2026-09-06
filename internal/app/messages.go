@@ -3,21 +3,21 @@ package app
 import "github.com/umekikazuya/gh-notify/internal/notification"
 
 type (
-	loadIdleMsg      struct{}
-	loadSuccessedMsg struct {
-		notifications []notification.Notification
+	LoadIdleMsg      struct{}
+	LoadSuccessedMsg struct {
+		Notifications []notification.Notification
 	}
-	loadFailedMsg struct {
+	LoadFailedMsg struct {
 		Err error
 	}
-	markIdleMsg struct {
+	MarkIdleMsg struct {
 		id       string
 		markType MarkType
 	}
-	markSuccessedMsg struct {
+	MarkSuccessedMsg struct {
 		n notification.Notification
 	}
-	markFailedMsg struct {
+	MarkFailedMsg struct {
 		Err error
 	}
 )

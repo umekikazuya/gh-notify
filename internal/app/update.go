@@ -12,30 +12,30 @@ import (
 // TODO: 再読み込み
 func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
-	case loadIdleMsg:
+	case LoadIdleMsg:
 		if m.Loading {
 			return m, nil
 		}
 		m.Loading = true
 		m.Error = nil
 		return m, m.FindAllFn()
-	case loadSuccessedMsg:
+	case LoadSuccessedMsg:
 		m.Loading = false
 		m.Error = nil
-		m.Notifications = append(m.Notifications, msg.notifications...)
+		m.Notifications = append(m.Notifications, msg.Notifications...)
 		return m, nil
-	case loadFailedMsg:
+	case LoadFailedMsg:
 		m.Loading = false
 		m.Error = msg.Err
 		return m, nil
-	case markIdleMsg:
+	case MarkIdleMsg:
 		if m.Loading {
 			return m, nil
 		}
 		m.Loading = true
 		m.Error = nil
 		return m, m.MarkNotificationFn(msg.id, msg.markType)
-	case markSuccessedMsg:
+	case MarkSuccessedMsg:
 		m.Loading = false
 		m.Error = nil
 		idx := slices.IndexFunc(m.Notifications, func(e notification.Notification) bool {
@@ -46,7 +46,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		m.Notifications[idx] = msg.n
 		return m, nil
-	case markFailedMsg:
+	case MarkFailedMsg:
 		m.Loading = false
 		m.Error = msg.Err
 		return m, nil
@@ -68,7 +68,7 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 		}
 		n := m.Notifications[m.Cursor]
 		return m, func() tea.Msg {
-			return markIdleMsg{
+			return MarkIdleMsg{
 				id:       n.ID,
 				markType: markType(n),
 			}

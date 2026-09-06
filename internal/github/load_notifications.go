@@ -4,47 +4,80 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"log"
 	"os/exec"
 	"time"
 
 	tea "charm.land/bubbletea/v2"
 	"github.com/umekikazuya/gh-notify/internal/app"
+	"github.com/umekikazuya/gh-notify/internal/notification"
 )
 
 func FindAll() tea.Cmd {
 	return func() tea.Msg {
-		return nil
+		ns, err := execGhApiNotifications()
+		if err != nil {
+			return app.LoadFailedMsg{
+				Err: err,
+			}
+		}
+		return app.LoadSuccessedMsg{
+			Notifications: ns,
+		}
 	}
 }
 
 var _ app.FindAllFn = FindAll
 
-func execGhApiNotifications() error {
+func execGhApiNotifications() ([]notification.Notification, error) {
 	ctx, cancel := context.WithTimeout(
 		context.Background(),
 		5*time.Second,
 	)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, "gh", "api", "notifications?all=true")
+	cmd := exec.CommandContext(ctx, "gh", "api", "notifications?all=false")
 	var stdOut bytes.Buffer
 	var stdErr bytes.Buffer
 	cmd.Stdout = &stdOut
 	cmd.Stderr = &stdErr
 	err := cmd.Run()
 	if err != nil {
-		return err
+		return nil, err
 	}
-	var data []demo
-	json.Unmarshal(stdOut.Bytes(), &data)
+	var data []thread
+	err = json.Unmarshal(stdOut.Bytes(), &data)
+	if err != nil {
+		return nil, err
+	}
+	ns := make([]notification.Notification, len(data))
 	for _, item := range data {
-		log.Printf("item = %v", item.ID)
+		ns = append(ns, notification.Notification{
+			ID:     item.ID,
+			Reason: item.Reason,
+			URL:    item.URL,
+			Number: "",
+			Title:  item.Subject.Title,
+			Repo:   item.Repo.Name,
+			Age:    item.UpdatedAt.Format(time.RFC3339),
+		})
 	}
 
-	return nil
+	return ns, nil
 }
 
-type demo struct {
-	ID string `json:"id"`
+type thread struct {
+	ID        string        `json:"id"`
+	Reason    string        `json:"reason"`
+	URL       string        `json:"url"`
+	UpdatedAt time.Time     `json:"updated_at"`
+	Repo      threadRepo    `json:"repository"`
+	Subject   threadSubject `json:"subject"`
+}
+
+type threadRepo struct {
+	Name string `json:"full_name"`
+}
+
+type threadSubject struct {
+	Title string `json:"title"`
 }

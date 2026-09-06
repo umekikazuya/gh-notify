@@ -21,8 +21,8 @@ func NewModel(
 	all bool,
 	findAllFn FindAllFn,
 	markNotificationFn MarkNotificationFn,
-) Model {
-	return Model{
+) tea.Model {
+	return &Model{
 		Width:              width,
 		All:                all,
 		FindAllFn:          findAllFn,
@@ -33,7 +33,7 @@ func NewModel(
 // Init implements [tea.Model].
 func (m *Model) Init() tea.Cmd {
 	return func() tea.Msg {
-		return loadIdleMsg{}
+		return LoadIdleMsg{}
 	}
 }
 
