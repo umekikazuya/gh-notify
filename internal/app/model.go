@@ -6,19 +6,30 @@ import (
 )
 
 type Model struct {
-	Notifications []notification.Notification
-	Cursor        int
-	Width         int
-	All           bool
-	Loading       bool
-	Error         error
-	FindAllFn     FindAllFn
+	Notifications      []notification.Notification
+	Cursor             int
+	Width              int
+	All                bool
+	Loading            bool
+	Error              error
+	FindAllFn          FindAllFn
+	MarkNotificationFn MarkNotificationFn
 }
 
+type MarkType int
+
+const (
+	MarkTypeRead   MarkType = iota
+	MarkTypeUnread MarkType = iota
+	MarkTypeDone   MarkType = iota
+)
+
 type (
-	FindAllFn            func() tea.Cmd
-	ReadNotificationFn   func(notification.Notification) tea.Cmd
-	UnreadNotificationFn func(notification.Notification) tea.Cmd
+	FindAllFn          func() tea.Cmd
+	MarkNotificationFn func(
+		threadID string,
+		markType MarkType,
+	) tea.Cmd
 )
 
 func NewModel(
@@ -38,6 +49,10 @@ func (m *Model) Init() tea.Cmd {
 	return func() tea.Msg {
 		return m.FindAllFn
 	}
+}
+
+func markType(n notification.Notification) MarkType {
+	return MarkTypeUnread // TODO: Notification 構造体を更新する必要あり。暫定で未読にする。
 }
 
 var _ tea.Model = (*Model)(nil)

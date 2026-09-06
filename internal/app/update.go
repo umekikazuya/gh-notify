@@ -32,12 +32,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 	switch msg.Key().String() {
-	case "r":
+	case "m":
 		if m.Loading {
 			return m, nil
 		}
 		m.Loading = true
-		return m, togglReadNotification(nil)
+		return m, m.MarkNotificationFn(
+			m.Notifications[m.Cursor].ID,
+			markType(m.Notifications[m.Cursor]),
+		)
 	case "j", "down":
 		if m.Cursor < len(m.Notifications)-1 {
 			m.Cursor++
