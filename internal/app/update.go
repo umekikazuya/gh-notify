@@ -1,7 +1,10 @@
 package app
 
 import (
+	"slices"
+
 	tea "charm.land/bubbletea/v2"
+	"github.com/umekikazuya/gh-notify/internal/notification"
 )
 
 // Update implements [tea.Model].
@@ -21,7 +24,23 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.Error = nil
 		m.Notifications = append(m.Notifications, msg.notifications...)
 		return m, nil
-	case loadFailed:
+	case loadFailedMsg:
+		m.Loading = false
+		m.Error = msg.Err
+		return m, nil
+	case markIdleMsg:
+		m.Loading = true
+		m.Error = nil
+		return m, m.MarkNotificationFn(msg.id, msg.markType)
+	case markSuccessedMsg:
+		m.Loading = false
+		m.Error = nil
+		idx := slices.IndexFunc(m.Notifications, func(e notification.Notification) bool {
+			return e.ID == msg.n.ID
+		})
+		m.Notifications[idx] = msg.n
+		return m, nil
+	case markFailedMsg:
 		m.Loading = false
 		m.Error = msg.Err
 		return m, nil
@@ -42,10 +61,13 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 			return m, nil
 		}
 		m.Loading = true
-		return m, m.MarkNotificationFn(
-			m.Notifications[m.Cursor].ID,
-			markType(m.Notifications[m.Cursor]),
-		)
+		n := m.Notifications[m.Cursor]
+		return m, func() tea.Msg {
+			return markIdleMsg{
+				id:       n.ID,
+				markType: markType(n),
+			}
+		}
 	case "j", "down":
 		if m.Cursor < len(m.Notifications)-1 {
 			m.Cursor++

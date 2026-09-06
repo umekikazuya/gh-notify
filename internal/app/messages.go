@@ -7,7 +7,17 @@ type (
 	loadSuccessedMsg struct {
 		notifications []notification.Notification
 	}
-	loadFailed struct {
+	loadFailedMsg struct {
+		Err error
+	}
+	markIdleMsg struct {
+		id       string
+		markType MarkType
+	}
+	markSuccessedMsg struct {
+		n notification.Notification
+	}
+	markFailedMsg struct {
 		Err error
 	}
 )
