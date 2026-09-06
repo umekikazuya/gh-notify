@@ -26,7 +26,7 @@ func NewModel(
 
 // Init implements [tea.Model].
 func (m *Model) Init() tea.Cmd {
-	panic("unimplemented")
+	return nil
 }
 
 var _ tea.Model = (*Model)(nil)

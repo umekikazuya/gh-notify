@@ -76,7 +76,7 @@ func Test_model_Update(t *testing.T) {
 					notificationData2,
 				}, Cursor: 0, Width: 80, All: false, Loading: false, Error: nil}
 			},
-			msg:  nil,
+			msg: nil,
 			want: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
 > review  #12  Rotate TLS certs 30m
@@ -100,6 +100,18 @@ func Test_model_Update(t *testing.T) {
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open r:read u:unread q:quit`,
+		},
+		{
+			name: "q キー入力",
+			seedFn: func(t *testing.T) tea.Model {
+				t.Helper()
+				return &Model{Notifications: []notification.Notification{
+					notificationData1,
+					notificationData2,
+				}, Cursor: 1, Width: 80, All: false, Loading: false, Error: nil}
+			},
+			msg:  tea.KeyPressMsg{Text: "q", Mod: 0, Code: 'q', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
+			want: "",
 		},
 	}
 	for _, tt := range tests {

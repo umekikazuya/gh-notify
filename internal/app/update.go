@@ -10,30 +10,18 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyPressMsg:
 		switch msg.Key().String() {
 		case "j", "down":
-			return m, moveCursorDown(m)
+			if m.Cursor <= len(m.Notifications)-1 {
+				m.Cursor++
+			}
+			return m, nil
 		case "k", "up":
-			return m, moveCursorUp(m)
+			if 0 < m.Cursor {
+				m.Cursor--
+			}
+			return m, nil
+		case "q":
+			return nil, tea.Quit
 		}
 	}
 	return m, nil
-}
-
-func moveCursorDown(m *Model) tea.Cmd {
-	return func() tea.Msg {
-		if len(m.Notifications)-1 == m.Cursor {
-			return nil
-		}
-		m.Cursor++
-		return nil
-	}
-}
-
-func moveCursorUp(m *Model) tea.Cmd {
-	return func() tea.Msg {
-		if m.Cursor == 0 {
-			return nil
-		}
-		m.Cursor--
-		return nil
-	}
 }
