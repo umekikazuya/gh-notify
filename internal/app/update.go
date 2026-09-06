@@ -20,7 +20,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			return m, nil
 		case "q":
-			return nil, tea.Quit
+			return m, tea.Quit
 		}
 	}
 	return m, nil

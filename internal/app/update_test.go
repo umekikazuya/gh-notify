@@ -1,6 +1,7 @@
 package app
 
 import (
+	"reflect"
 	"testing"
 
 	tea "charm.land/bubbletea/v2"
@@ -9,10 +10,11 @@ import (
 
 func Test_model_Update(t *testing.T) {
 	tests := []struct {
-		name   string
-		seedFn func(t *testing.T) tea.Model
-		msg    tea.Msg
-		want   string
+		name     string
+		seedFn   func(t *testing.T) tea.Model
+		msg      tea.Msg
+		want     string
+		assertFn func(t *testing.T, cmd tea.Cmd)
 	}{
 		{
 			name: "keydown",
@@ -117,12 +119,26 @@ func Test_model_Update(t *testing.T) {
 > mention #111 キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open r:read u:unread q:quit`,
+			assertFn: func(t *testing.T, cmd tea.Cmd) {
+				t.Helper()
+				got := cmd()
+				if reflect.TypeOf(got) != reflect.TypeOf(tea.QuitMsg{}) {
+					t.Errorf(
+						"check type: got = %v, tea.QuitMsg{} = %v",
+						reflect.TypeOf(got),
+						reflect.TypeOf(tea.QuitMsg{}),
+					)
+				}
+			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			m := tt.seedFn(t)
 			_, cmd := m.Update(tt.msg)
+			if tt.assertFn != nil {
+				tt.assertFn(t, cmd)
+			}
 			if cmd != nil {
 				cmd()
 			}
