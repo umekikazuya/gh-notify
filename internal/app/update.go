@@ -34,17 +34,24 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		m.Loading = true
 		m.Error = nil
-		return m, m.MarkNotificationFn(msg.id, msg.markType)
-	case MarkSuccessedMsg:
-		m.Loading = false
-		m.Error = nil
 		idx := slices.IndexFunc(m.Notifications, func(e notification.Notification) bool {
-			return e.ID == msg.n.ID
+			return e.ID == msg.id
 		})
 		if idx == -1 {
 			return m, nil
 		}
-		m.Notifications[idx] = msg.n
+		target := m.Notifications[idx]
+		return m, m.MarkNotificationFn(target)
+	case MarkSuccessedMsg:
+		m.Loading = false
+		m.Error = nil
+		idx := slices.IndexFunc(m.Notifications, func(e notification.Notification) bool {
+			return e.ID == msg.Notification.ID
+		})
+		if idx == -1 {
+			return m, nil
+		}
+		m.Notifications[idx] = msg.Notification
 		return m, nil
 	case MarkFailedMsg:
 		m.Loading = false

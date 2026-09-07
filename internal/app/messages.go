@@ -15,7 +15,7 @@ type (
 		markType MarkType
 	}
 	MarkSuccessedMsg struct {
-		n notification.Notification
+		Notification notification.Notification
 	}
 	MarkFailedMsg struct {
 		Err error
