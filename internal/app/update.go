@@ -58,6 +58,7 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.Error = msg.Err
 		return m, nil
 	case OpenBrowserIdleMsg:
+		m.Error = nil
 		return m, openBrowserCmd(
 			msg.URL,
 			m.GetTreadHTMLURL,
