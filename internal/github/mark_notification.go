@@ -17,7 +17,9 @@ func MarkNotification(
 	return func() tea.Msg {
 		err := execGhApiThread(n.ID)
 		if err != nil {
-			return err
+			return app.MarkFailedMsg{
+				Err: err,
+			}
 		}
 		return app.MarkSuccessedMsg{
 			Notification: notification.Notification{

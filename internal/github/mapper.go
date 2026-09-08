@@ -36,7 +36,10 @@ func formatNumber(in string) string {
 // 1時間~24時間前: %dh age
 // 24時間以上: %dd age
 func formatAge(in time.Time, baseTimeFn func() time.Time) string {
-	diff := in.Sub(baseTimeFn())
+	diff := baseTimeFn().Sub(in)
+	if diff < 0 {
+		return ""
+	}
 	switch {
 	case diff < time.Hour:
 		return fmt.Sprintf("%dm age", diff/time.Minute)

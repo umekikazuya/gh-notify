@@ -18,32 +18,32 @@ func Test_formatAge(t *testing.T) {
 		want       string
 	}{
 		{
-			in:         baseTime.Add(1 * time.Minute),
+			in:         baseTime.Add(-1 * time.Minute),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "1m age",
 		},
 		{
-			in:         baseTime.Add(59 * time.Minute),
+			in:         baseTime.Add(-59 * time.Minute),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "59m age",
 		},
 		{
-			in:         baseTime.Add(60 * time.Minute),
+			in:         baseTime.Add(-60 * time.Minute),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "1h age",
 		},
 		{
-			in:         baseTime.Add(61 * time.Minute),
+			in:         baseTime.Add(-61 * time.Minute),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "1h age",
 		},
 		{
-			in:         baseTime.Add(2 * time.Hour),
+			in:         baseTime.Add(-2 * time.Hour),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "2h age",
 		},
 		{
-			in:         baseTime.Add(24 * time.Hour),
+			in:         baseTime.Add(-24 * time.Hour),
 			baseTimeFn: fixtureBaseTimeFn,
 			want:       "1d age",
 		},

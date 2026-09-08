@@ -49,7 +49,7 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 	if err != nil {
 		return nil, err
 	}
-	ns := make([]notification.Notification, len(data))
+	ns := make([]notification.Notification, 0, len(data))
 	for _, item := range data {
 		n := mapNotification(item)
 		ns = append(ns, n)
