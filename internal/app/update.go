@@ -94,7 +94,7 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 		}
 	case "q":
 		return m, tea.Quit
-	case "w":
+	case "o":
 		return m, func() tea.Msg {
 			return OpenBrowserMsg{
 				URL: m.Notifications[m.Cursor].URL,

@@ -55,7 +55,7 @@ func View(model Model) string {
 		)
 	}
 	lines = append(lines, rule(width))
-	lines = append(lines, fitLine(" w:open m:markRead/markUnread q:quit", width))
+	lines = append(lines, fitLine(" o:open m:markRead/markUnread q:quit", width))
 	return strings.Join(lines, "\n")
 }
 
