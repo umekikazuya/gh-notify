@@ -14,8 +14,8 @@ const (
 )
 
 type (
-	FindAllFn          func() tea.Cmd
-	MarkNotificationFn func(
+	FindAllFn              func() tea.Cmd
+	MarkReadNotificationFn func(
 		n notification.Notification,
 	) tea.Cmd
 )

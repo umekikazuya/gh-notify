@@ -11,7 +11,7 @@ import (
 	"github.com/umekikazuya/gh-notify/internal/notification"
 )
 
-func MarkNotification(
+func MarkReadNotification(
 	n notification.Notification,
 ) tea.Cmd {
 	return func() tea.Msg {
@@ -35,7 +35,7 @@ func MarkNotification(
 	}
 }
 
-var _ app.MarkNotificationFn = MarkNotification
+var _ app.MarkReadNotificationFn = MarkReadNotification
 
 func execGhApiThread(threadID string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

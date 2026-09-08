@@ -13,14 +13,14 @@ type Model struct {
 	Loading            bool
 	Error              error
 	FindAllFn          FindAllFn
-	MarkNotificationFn MarkNotificationFn
+	MarkNotificationFn MarkReadNotificationFn
 }
 
 func NewModel(
 	width int,
 	all bool,
 	findAllFn FindAllFn,
-	markNotificationFn MarkNotificationFn,
+	markNotificationFn MarkReadNotificationFn,
 ) tea.Model {
 	return &Model{
 		Width:              width,
