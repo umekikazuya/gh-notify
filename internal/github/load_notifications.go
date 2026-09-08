@@ -35,7 +35,14 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 	)
 	defer cancel()
 
-	cmd := exec.CommandContext(ctx, "gh", "api", "notifications?all=false")
+	cmd := exec.CommandContext(
+		ctx,
+		"gh",
+		"api",
+		"notifications?all=false",
+		"--paginate",
+		"--slurp",
+	)
 	var stdOut bytes.Buffer
 	var stdErr bytes.Buffer
 	cmd.Stdout = &stdOut
@@ -44,12 +51,16 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 	if err != nil {
 		return nil, err
 	}
-	var data []thread
-	err = json.Unmarshal(stdOut.Bytes(), &data)
+	var page [][]thread
+	err = json.Unmarshal(stdOut.Bytes(), &page)
 	if err != nil {
 		return nil, err
 	}
-	ns := make([]notification.Notification, 0, len(data))
+	var data []thread
+	for _, item := range page {
+		data = append(data, item...)
+	}
+	ns := make([]notification.Notification, 0, len(page))
 	for _, item := range data {
 		n := mapNotification(item)
 		ns = append(ns, n)
@@ -72,4 +83,5 @@ type threadRepo struct {
 
 type threadSubject struct {
 	Title string `json:"title"`
+	URL   string `json:"url"`
 }

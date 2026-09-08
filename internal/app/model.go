@@ -37,8 +37,4 @@ func (m *Model) Init() tea.Cmd {
 	}
 }
 
-func markType(n notification.Notification) MarkType {
-	return MarkTypeUnread // TODO: Notification 構造体を更新する必要あり。暫定で未読にする。
-}
-
 var _ tea.Model = (*Model)(nil)

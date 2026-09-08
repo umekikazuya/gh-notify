@@ -76,8 +76,7 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 		n := m.Notifications[m.Cursor]
 		return m, func() tea.Msg {
 			return MarkIdleMsg{
-				id:       n.ID,
-				markType: markType(n),
+				id: n.ID,
 			}
 		}
 	case "j", "down":

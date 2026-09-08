@@ -11,8 +11,7 @@ type (
 		Err error
 	}
 	MarkIdleMsg struct {
-		id       string
-		markType MarkType
+		id string
 	}
 	MarkSuccessedMsg struct {
 		Notification notification.Notification
