@@ -28,16 +28,16 @@ func Test_model_Update(t *testing.T) {
 			msg: tea.KeyPressMsg{Text: "j", Mod: 0, Code: 'j', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
 			wantBeforeCMD: ` gh notify                                                              3 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
-  mention #111 APIの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
+  mention #111  APIの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              3 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
-  mention #111 APIの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
+  mention #111  APIの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},
@@ -53,14 +53,14 @@ func Test_model_Update(t *testing.T) {
 			msg: tea.KeyPressMsg{Text: "k", Mod: 0, Code: 'k', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
 			wantBeforeCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-> review  #12  Rotate TLS certs 30m
-  mention #111 キャッシュの 確認 をお願いします。  1h
+> review  #12   Rotate TLS certs 30m
+  mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-> review  #12  Rotate TLS certs 30m
-  mention #111 キャッシュの 確認 をお願いします。  1h
+> review  #12   Rotate TLS certs 30m
+  mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},
@@ -76,14 +76,14 @@ func Test_model_Update(t *testing.T) {
 			msg: tea.KeyPressMsg{Text: "k", Mod: 0, Code: 'k', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
 			wantBeforeCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-> review  #12  Rotate TLS certs 30m
-  mention #111 キャッシュの 確認 をお願いします。  1h
+> review  #12   Rotate TLS certs 30m
+  mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-> review  #12  Rotate TLS certs 30m
-  mention #111 キャッシュの 確認 をお願いします。  1h
+> review  #12   Rotate TLS certs 30m
+  mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},
@@ -99,14 +99,14 @@ func Test_model_Update(t *testing.T) {
 			msg: tea.KeyPressMsg{Text: "j", Mod: 0, Code: 'j', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
 			wantBeforeCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},
@@ -122,14 +122,14 @@ func Test_model_Update(t *testing.T) {
 			msg: tea.KeyPressMsg{Text: "q", Mod: 0, Code: 'q', ShiftedCode: 0, BaseCode: 0, IsRepeat: false},
 			wantBeforeCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},

@@ -29,8 +29,8 @@ func TestView(t *testing.T) {
 			},
 			want: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
-  review  #12  Rotate TLS certs 30m
-> mention #111 キャッシュの 確認 をお願いします。  1h
+  review  #12   Rotate TLS certs 30m
+> mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
  w:open m:markRead/markUnread q:quit`,
 		},

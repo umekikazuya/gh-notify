@@ -13,16 +13,16 @@ type Model struct {
 	Loading            bool
 	Error              error
 	FindAllFn          FindAllFn
-	MarkNotificationFn MarkNotificationFn
+	MarkNotificationFn MarkReadNotificationFn
 }
 
 func NewModel(
 	width int,
 	all bool,
 	findAllFn FindAllFn,
-	markNotificationFn MarkNotificationFn,
-) Model {
-	return Model{
+	markNotificationFn MarkReadNotificationFn,
+) tea.Model {
+	return &Model{
 		Width:              width,
 		All:                all,
 		FindAllFn:          findAllFn,
@@ -33,12 +33,8 @@ func NewModel(
 // Init implements [tea.Model].
 func (m *Model) Init() tea.Cmd {
 	return func() tea.Msg {
-		return loadIdleMsg{}
+		return LoadIdleMsg{}
 	}
-}
-
-func markType(n notification.Notification) MarkType {
-	return MarkTypeUnread // TODO: Notification 構造体を更新する必要あり。暫定で未読にする。
 }
 
 var _ tea.Model = (*Model)(nil)

@@ -18,7 +18,7 @@ func (m *Model) View() tea.View {
 var (
 	defaultWidth = 80
 	reasonWidth  = 7
-	numberWidth  = 4
+	numberWidth  = 5
 	ageWidth     = 3
 )
 

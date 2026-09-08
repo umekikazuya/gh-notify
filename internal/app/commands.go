@@ -1,6 +1,9 @@
 package app
 
-import tea "charm.land/bubbletea/v2"
+import (
+	tea "charm.land/bubbletea/v2"
+	"github.com/umekikazuya/gh-notify/internal/notification"
+)
 
 type MarkType int
 
@@ -11,9 +14,8 @@ const (
 )
 
 type (
-	FindAllFn          func() tea.Cmd
-	MarkNotificationFn func(
-		threadID string,
-		markType MarkType,
+	FindAllFn              func() tea.Cmd
+	MarkReadNotificationFn func(
+		n notification.Notification,
 	) tea.Cmd
 )
