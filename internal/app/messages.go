@@ -19,7 +19,10 @@ type (
 	MarkFailedMsg struct {
 		Err error
 	}
-	OpenBrowserMsg struct {
+	OpenBrowserIdleMsg struct {
 		URL string
+	}
+	OpenBrowserFailedMsg struct {
+		Err error
 	}
 )

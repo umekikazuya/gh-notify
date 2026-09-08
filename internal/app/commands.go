@@ -31,7 +31,9 @@ func openBrowserCmd(
 	return func() tea.Msg {
 		url, err := getThreadHTMLURLFn(rawURL)
 		if err != nil {
-			return err
+			return OpenBrowserFailedMsg{
+				Err: err,
+			}
 		}
 		cmd := exec.CommandContext(
 			context.Background(),
@@ -40,7 +42,9 @@ func openBrowserCmd(
 		)
 		err = cmd.Start()
 		if err != nil {
-			return nil // TODO
+			return OpenBrowserFailedMsg{
+				Err: err,
+			}
 		}
 		return nil
 	}
