@@ -40,7 +40,7 @@ func openBrowserCmd(
 			"open",
 			url,
 		)
-		err = cmd.Start()
+		err = cmd.Run() // TODO: 暫定でMacのみ対応
 		if err != nil {
 			return OpenBrowserFailedMsg{
 				Err: err,
