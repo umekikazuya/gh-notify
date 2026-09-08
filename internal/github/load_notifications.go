@@ -60,7 +60,7 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 	for _, item := range page {
 		data = append(data, item...)
 	}
-	ns := make([]notification.Notification, 0, len(page))
+	ns := make([]notification.Notification, 0, len(data))
 	for _, item := range data {
 		n := mapNotification(item)
 		ns = append(ns, n)
