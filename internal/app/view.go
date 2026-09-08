@@ -19,7 +19,7 @@ var (
 	defaultWidth = 80
 	reasonWidth  = 7
 	numberWidth  = 4
-	ageWidth     = 3
+	ageWidth     = 8
 )
 
 func View(model Model) string {

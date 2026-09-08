@@ -51,17 +51,9 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 	}
 	ns := make([]notification.Notification, len(data))
 	for _, item := range data {
-		ns = append(ns, notification.Notification{
-			ID:     item.ID,
-			Reason: item.Reason,
-			URL:    item.URL,
-			Number: "",
-			Title:  item.Subject.Title,
-			Repo:   item.Repo.Name,
-			Age:    item.UpdatedAt.Format(time.RFC3339),
-		})
+		n := mapNotification(item)
+		ns = append(ns, n)
 	}
-
 	return ns, nil
 }
 
