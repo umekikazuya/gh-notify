@@ -57,6 +57,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.Loading = false
 		m.Error = msg.Err
 		return m, nil
+	case OpenBrowserIdleMsg:
+		m.Error = nil
+		return m, openBrowserCmd(
+			msg.URL,
+			m.GetTreadHTMLURL,
+		)
+	case OpenBrowserFailedMsg:
+		m.Error = msg.Err
+		return m, nil
 	case tea.KeyPressMsg:
 		return handleKey(m, msg)
 	default:
@@ -89,6 +98,15 @@ func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
 		}
 	case "q":
 		return m, tea.Quit
+	case "o":
+		if len(m.Notifications) == 0 {
+			return m, nil
+		}
+		return m, func() tea.Msg {
+			return OpenBrowserIdleMsg{
+				URL: m.Notifications[m.Cursor].URL,
+			}
+		}
 	}
 	return m, nil
 }

@@ -32,14 +32,14 @@ func Test_model_Update(t *testing.T) {
 > mention #111  キャッシュの 確認 をお願いします。  1h
   mention #111  APIの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              3 unread
 --------------------------------------------------------------------------------
   review  #12   Rotate TLS certs 30m
 > mention #111  キャッシュの 確認 をお願いします。  1h
   mention #111  APIの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 		},
 		{
 			name: "keyup",
@@ -56,13 +56,13 @@ func Test_model_Update(t *testing.T) {
 > review  #12   Rotate TLS certs 30m
   mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
 > review  #12   Rotate TLS certs 30m
   mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 		},
 		{
 			name: "カーソルがこれ以上上がらない",
@@ -79,13 +79,13 @@ func Test_model_Update(t *testing.T) {
 > review  #12   Rotate TLS certs 30m
   mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
 > review  #12   Rotate TLS certs 30m
   mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 		},
 		{
 			name: "カーソルがこれ以上下がらない",
@@ -102,13 +102,13 @@ func Test_model_Update(t *testing.T) {
   review  #12   Rotate TLS certs 30m
 > mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
   review  #12   Rotate TLS certs 30m
 > mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 		},
 		{
 			name: "q キー入力",
@@ -125,13 +125,13 @@ func Test_model_Update(t *testing.T) {
   review  #12   Rotate TLS certs 30m
 > mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 			wantAfterCMD: ` gh notify                                                              2 unread
 --------------------------------------------------------------------------------
   review  #12   Rotate TLS certs 30m
 > mention #111  キャッシュの 確認 をお願いします。  1h
 --------------------------------------------------------------------------------
- w:open m:markRead/markUnread q:quit`,
+ o:open m:markRead/markUnread q:quit`,
 		},
 	}
 	for _, tt := range tests {

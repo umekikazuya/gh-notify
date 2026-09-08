@@ -71,7 +71,6 @@ func execGhApiNotifications() ([]notification.Notification, error) {
 type thread struct {
 	ID        string        `json:"id"`
 	Reason    string        `json:"reason"`
-	URL       string        `json:"url"`
 	UpdatedAt time.Time     `json:"updated_at"`
 	Repo      threadRepo    `json:"repository"`
 	Subject   threadSubject `json:"subject"`
