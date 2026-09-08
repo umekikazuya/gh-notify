@@ -69,7 +69,7 @@ func Test_formatNumber(t *testing.T) {
 	}{
 		{
 			in:   "https://api.github.com/repos/octokit/octokit.rb/issues/123",
-			want: "123",
+			want: "#123",
 		},
 	}
 	for i, tt := range tests {
