@@ -13,7 +13,7 @@ func mapNotification(raw thread) notification.Notification {
 	return notification.Notification{
 		ID:     raw.ID,
 		Reason: raw.Reason,
-		URL:    raw.URL,
+		URL:    raw.Subject.URL,
 		Number: formatNumber(raw.Subject.URL),
 		Title:  raw.Subject.Title,
 		Repo:   raw.Repo.Name,

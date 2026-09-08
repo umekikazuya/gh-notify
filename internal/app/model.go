@@ -14,6 +14,7 @@ type Model struct {
 	Error              error
 	FindAllFn          FindAllFn
 	MarkNotificationFn MarkReadNotificationFn
+	GetTreadHTMLURL    GetTreadHTMLURLFn
 }
 
 func NewModel(
@@ -21,12 +22,14 @@ func NewModel(
 	all bool,
 	findAllFn FindAllFn,
 	markNotificationFn MarkReadNotificationFn,
+	getTreadHTMLURL GetTreadHTMLURLFn,
 ) tea.Model {
 	return &Model{
 		Width:              width,
 		All:                all,
 		FindAllFn:          findAllFn,
 		MarkNotificationFn: markNotificationFn,
+		GetTreadHTMLURL:    getTreadHTMLURL,
 	}
 }
 
