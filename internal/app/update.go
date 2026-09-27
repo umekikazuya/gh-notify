@@ -76,9 +76,6 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func windowSize(m *Model, msg tea.WindowSizeMsg) tea.Model {
-	if m.Width <= msg.Width {
-		return m
-	}
 	m.Width = msg.Width
 	return m
 }
