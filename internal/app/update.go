@@ -68,9 +68,19 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m, nil
 	case tea.KeyPressMsg:
 		return handleKey(m, msg)
+	case tea.WindowSizeMsg:
+		return windowSize(m, msg), nil
 	default:
 		return m, nil
 	}
+}
+
+func windowSize(m *Model, msg tea.WindowSizeMsg) tea.Model {
+	if m.Width <= msg.Width {
+		return m
+	}
+	m.Width = msg.Width
+	return m
 }
 
 func handleKey(m *Model, msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {
